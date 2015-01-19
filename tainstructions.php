@@ -56,7 +56,7 @@ if($_POST['initialize'])
 
 		include_once($toroot.'inc/class.processforms.php');
 		$up=new processforms;
-		if($set)
+		if($data['startdt'])
 			$saved=$up->UpdateDB('SCHEDteamseas',$teamID, 'teamID');
 		else
 			$saved=$up->AddToDB('SCHEDteamseas');
@@ -71,7 +71,6 @@ if($_POST['initialize'])
 				sqlexecute($db,$sql);
 			}
 		}
-		$set=true;
 		$host=$_SERVER['HTTP_HOST'];
 		header("Location: http://$host/members/team/tarestricdays.php?teamID=$teamID");	
 	}
@@ -240,6 +239,16 @@ if($printscreen)
 		{
 			echo '<OPTION';
 			if($i==$data['maxGames'])
+				echo ' SELECTED';
+			echo '>'.$i.'</OPTION>';
+		}
+		echo '</SELECT><BR>
+			<LABEL FOR="maxContin">Max Continuous Games:</LABEL>
+				<SELECT NAME="maxContin" ID="maxContin">';
+		for($i=1;$i<=50;$i++)
+		{
+			echo '<OPTION';
+			if($i==$data['maxContin'])
 				echo ' SELECTED';
 			echo '>'.$i.'</OPTION>';
 		}
